@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>SimFlyMinimums - vAMSYS sign-in</title>
+<style>
+  body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background: #f4f5f7; color: #222; }
+  main { max-width: 560px; margin: 12vh auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  h1 { font-size: 20px; margin-top: 0; }
+  p { line-height: 1.5; }
+  .err { color: #b71c1c; }
+</style>
+</head>
+<body>
+<main>
+  <h1>SimFlyMinimums &middot; vAMSYS sign-in</h1>
+  <p id="msg">Returning to the SimFlyMinimums app on this computer&hellip;</p>
+  <noscript><p class="err">JavaScript is needed to return to the app.</p></noscript>
+</main>
+<script>
+(function () {
+  // This page only hands the answer of vAMSYS (code + state) to the SimFlyMinimums app running on THIS computer.
+  // It stores nothing, sends nothing anywhere else and has no third-party scripts.
+  var ALLOWED_PORTS = ['5266', '5270'];
+  var q = new URLSearchParams(window.location.search);
+  var msg = document.getElementById('msg');
+
+  function fail(text) {
+    msg.className = 'err';
+    msg.textContent = text;
+  }
+
+  if (q.get('error')) {
+    fail('vAMSYS did not authorise the sign-in: ' + q.get('error') + (q.get('error_description') ? ' - ' + q.get('error_description') : ''));
+    return;
+  }
+
+  var code = q.get('code');
+  var state = q.get('state') || '';
+  // the app puts its local port in front of the state: "<port>.<random>"
+  var port = state.split('.')[0];
+  if (!code || ALLOWED_PORTS.indexOf(port) < 0) {
+    fail('This sign-in answer is not valid (missing code or unknown app port). Close this page and start the sign-in again from SimFlyMinimums.');
+    return;
+  }
+
+  var target = 'http://localhost:' + port + '/vamsys/callback?code=' + encodeURIComponent(code) + '&state=' + encodeURIComponent(state);
+  window.location.replace(target);
+})();
+</script>
+</body>
+</html>

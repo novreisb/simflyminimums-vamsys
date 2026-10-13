@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimFlyMinimums - Privacy policy</title>
+<style>
+  body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background: #f4f5f7; color: #222; }
+  main { max-width: 760px; margin: 6vh auto; padding: 28px 32px; background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  h1 { font-size: 24px; margin-top: 0; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  p, li { line-height: 1.55; }
+</style>
+</head>
+<body>
+<main>
+  <h1>SimFlyMinimums &mdash; Privacy policy</h1>
+  <p><em>Applies to the sign-in with vAMSYS in the SimFlyMinimums flight simulation companion app.</em></p>
+
+  <h2>What the app is</h2>
+  <p>SimFlyMinimums is a free companion application for flight simulation (checklists, approach and flight-phase assistance and a personal flight record). It runs on the pilot's own computer.</p>
+
+  <h2>What it reads from vAMSYS</h2>
+  <p>Only after the pilot signs in and approves it on the vAMSYS consent screen, the app reads, with read-only permissions:</p>
+  <ul>
+    <li>the pilot's name and e-mail address (<code>identity:basic</code>);</li>
+    <li>the pilot's profile (<code>pilot:read</code>);</li>
+    <li>the pilot's own bookings and flights (<code>flights:read</code>).</li>
+  </ul>
+  <p>It is used to fill in the callsign, flight number, aircraft and route of the booking in the app. Nothing else is requested.</p>
+
+  <h2>What it never does</h2>
+  <ul>
+    <li>It never writes to vAMSYS: it does not create or change bookings, flight reports, points or any other data.</li>
+    <li>It never receives or stores the pilot's vAMSYS password: sign-in happens on the vAMSYS site (OAuth 2.0 with PKCE).</li>
+    <li>It does not send the pilot's data to the developer or to any third party.</li>
+  </ul>
+
+  <h2>Where the data is kept</h2>
+  <p>The access and refresh tokens, and the booking data read, are kept only on the pilot's own computer, in the app's local data folder. The page that receives the sign-in answer (<code>vamsys-callback.html</code>) only passes the answer on to the app on the same computer and stores nothing.</p>
+
+  <h2>Control by the pilot</h2>
+  <p>The pilot can sign out in the app at any time, which deletes the stored tokens, and can revoke the app's access in vAMSYS. Uninstalling the app or deleting its data folder removes everything it kept.</p>
+
+  <h2>Contact</h2>
+  <p>Developer: Luiz Novais Reis &mdash; <a href="https://github.com/novreisb">github.com/novreisb</a>.</p>
+</main>
+</body>
+</html>
